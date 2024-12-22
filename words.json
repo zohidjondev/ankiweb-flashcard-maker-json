@@ -1,0 +1,83 @@
+{
+  "Words": {
+    "apple": {
+      "transcription": "ˈæpəl",
+      "definition": "a hard round fruit that has red, light green, or yellow skin and is white inside.",
+      "synonyms": ["Green Apple", "Red Apple"],
+      "antonyms": ["Orange", "Grapes"],
+      "Examples": {
+        "Example1": "Apple ssssspie",
+        "Example2": "An apple tree",
+        "Example3": "Roast pork and apple sauce (=a thick sauce made from cooked apples)"
+      }
+    },
+    "orange": {
+      "transcription": "ˈæpəl",
+      "definition": "a hard round fruit that has red, light green, or yellow skin and is white inside.",
+      "synonyms": ["None"],
+      "antonyms": ["Orange", "Grapes"],
+      "Examples": {
+        "Example1": "Apple pie",
+        "Example2": "An apple tree",
+        "Example3": "Roast pork and apple sauce (=a thick sauce made from cooked apples)"
+      }
+    },
+    "voracious": {
+      "transcription": "ˈæpəl",
+      "partOfSpeech": "adjective",
+      "otherPartOfSpeech": {
+        "adverb": "voraciously",
+        "adjective": "",
+        "noun": "voracity",
+        "verb": ""
+        
+      },
+      "definition": "a hard round fruit that has red, light green, or yellow skin and is white inside.",
+      "synonyms": ["Green Apple", "Red Apple"],
+      "antonyms": ["Orange", "Grapes"],
+      "Examples": {
+        "Example1": "Apple pie",
+        "Example2": "An apple tree",
+        "Example3": "Roast pork and apple sauce (=a thick sauce made from cooked apples)"
+      }
+    },
+    "s": {
+      "transcription": "ˈæpəl",
+      "partOfSpeech": "adjective",
+      "otherPartOfSpeech": {
+        "adverb": "voraciously",
+        "adjective": "",
+        "noun": "voracity",
+        "verb": ""
+        
+      },
+      "definition": "a hard round fruit that has red, light green, or yellow skin and is white inside.",
+      "synonyms": ["Green Apple", "Red Apple"],
+      "antonyms": ["Orange", "Grapes"],
+      "Examples": {
+        "Example1": "Apple pie",
+        "Example2": "An apple tree",
+        "Example3": "Roast pork and apple sauce (=a thick sauce made from cooked apples)"
+      }
+    },
+    "voracsious": {
+      "transcription": "ˈæpəl",
+      "partOfSpeech": "adjective",
+      "otherPartOfSpeech": {
+        "adverb": "voraciously",
+        "adjective": "",
+        "noun": "voracity",
+        "verb": ""
+        
+      },
+      "definition": "a hard round fruit that has red, light green, or yellow skin and is white inside.",
+      "synonyms": ["Green Apple", "Red Apple"],
+      "antonyms": ["Orange", "Grapes"],
+      "Examples": {
+        "Example1": "Apple pie",
+        "Example2": "An apple tree",
+        "Example3": "Roast pork and apple sauce (=a thick sauce made from cooked apples)"
+      }
+    }
+  }
+}

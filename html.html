@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flashcards</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        min-height: 100vh;
+        background-color: #f8f9fa;
+        overflow-x: hidden; /* Prevent horizontal scrolling */
+      }
+      h1, h2 {
+        text-align: center;
+        color: #333;
+      }
+      .section {
+        background-color: #fff;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin: 20px;
+        width: 90%;
+        max-width: 1200px;
+      }
+      textarea {
+        width: calc(100% - 20px);
+        padding: 10px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        margin-bottom: 10px;
+        resize: none;
+        height: 30rem;
+      }
+      button {
+        padding: 10px;
+        border: none;
+        background-color: #4285f4;
+        color: #fff;
+        border-radius: 20px;
+        cursor: pointer;
+        width: 100%;
+        font-size: 1rem;
+        font-weight: bold;
+      }
+      button:hover {
+        background-color: #3367d6;
+      }
+      .flashcards-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+        justify-items: center;
+        width: 100%;
+        max-width: 1200px; /* Prevent cards from stretching too wide */
+        margin: 20px auto;
+      }
+      .flashcard {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        width: 100%;
+        max-width: 300px;
+      }
+      .flashcard h3 {
+        margin: 0 0 10px;
+        font-size: 1.4em;
+        font-weight: bold;
+        color: #333;
+      }
+      .flashcard p {
+        margin: 5px 0;
+        font-size: 1em;
+        color: #555;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+      ul li {
+        text-align: left;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Flashcards Generator</h1>
+
+    <!-- Section 1: Copyable JSON Framework -->
+    <div class="section">
+      <h2>JSON Framework</h2>
+      <textarea id="json-framework" readonly>{
+  "Words": {
+    "example": {
+      "transcription": "",
+      "definition": "",
+      "synonyms": [""],
+      "antonyms": [""],
+      "Examples": {
+        "Example1": "",
+        "Example2": "",
+        "Example3": ""
+      }
+    }
+  }
+}</textarea>
+      <button onclick="copyJSON()">Copy JSON Framework</button>
+    </div>
+
+    <!-- Section 2: JSON Input Field -->
+    <div class="section">
+      <h2>Enter JSON</h2>
+      <textarea id="json-input" placeholder="Paste your JSON structure here..."></textarea>
+      <button onclick="loadFlashcards()">Load Flashcards</button>
+    </div>
+
+    <!-- Section 3: Flashcards Container -->
+    <div class="section">
+      <h2>Flashcards</h2>
+      <div class="flashcards-container" id="flashcards-container"></div>
+    </div>
+
+    <script>
+      function copyJSON() {
+        const jsonField = document.getElementById("json-framework");
+        jsonField.select();
+        document.execCommand("copy");
+        alert("JSON framework copied!");
+      }
+
+      function loadFlashcards() {
+        const input = document.getElementById("json-input").value;
+        try {
+          const data = JSON.parse(input);
+          if (data && data.Words) {
+            createFlashcards(data);
+          } else {
+            alert("Invalid JSON structure. Please include a 'Words' object.");
+          }
+        } catch (error) {
+          alert("Invalid JSON format. Please check your input.");
+        }
+      }
+
+      function createFlashcards(data) {
+        const container = document.getElementById("flashcards-container");
+        container.innerHTML = ""; // Clear existing flashcards
+
+        const words = data.Words;
+
+        for (const [word, details] of Object.entries(words)) {
+          const flashcard = document.createElement("div");
+          flashcard.className = "flashcard";
+
+          const synonyms = details.synonyms ? details.synonyms.join(", ") : "None";
+          const antonyms = details.antonyms ? details.antonyms.join(", ") : "None";
+          const examples = Object.values(details.Examples || {})
+            .map((example) => `<li>${example}</li>`)
+            .join("");
+
+          flashcard.innerHTML = `
+            <h3>${word}</h3>
+            <p><i>[${details.transcription || "N/A"}]</i> - ${details.definition}</p>
+            <p><b>Synonyms:</b> ${synonyms}</p>
+            <p><b>Antonyms:</b> ${antonyms}</p>
+            <p><b>Examples:</b><ul>${examples}</ul></p>
+          `;
+
+          container.appendChild(flashcard);
+        }
+      }
+    </script>
+  </body>
+</html>
