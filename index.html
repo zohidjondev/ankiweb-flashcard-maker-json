@@ -14,7 +14,7 @@
         align-items: center;
         justify-content: flex-start;
         min-height: 100vh;
-        background-color: #f8f9fa;
+        background-color: #000;
         overflow-x: hidden; /* Prevent horizontal scrolling */
       }
       h1, h2 {
@@ -22,7 +22,7 @@
         color: #333;
       }
       .section {
-        background-color: #fff;
+        background-color: #000000;
         border-radius: 15px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         padding: 20px;
@@ -64,8 +64,6 @@
         margin: 20px auto;
       }
       .flashcard {
-        background-color: #fff;
-        border: 1px solid #ddd;
         border-radius: 15px;
         padding: 20px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -73,16 +71,21 @@
         width: 100%;
         max-width: 300px;
       }
+
+      em {
+        color: #fff;
+      }
+
       .flashcard h3 {
         margin: 0 0 10px;
         font-size: 1.4em;
         font-weight: bold;
-        color: #333;
+        color: #fff;
       }
       .flashcard p {
         margin: 5px 0;
         font-size: 1em;
-        color: #555;
+        color: #fff;
       }
       ul {
         list-style: none;
@@ -167,7 +170,7 @@
           const synonyms = details.synonyms ? details.synonyms.join(", ") : "None";
           const antonyms = details.antonyms ? details.antonyms.join(", ") : "None";
           const examples = Object.values(details.Examples || {})
-            .map((example) => `<li>${example}</li>`)
+            .map((example) => `<li><em>"${example}"</em></li>`)
             .join("");
 
           flashcard.innerHTML = `
