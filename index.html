@@ -15,11 +15,11 @@
         justify-content: flex-start;
         min-height: 100vh;
         background-color: #000;
-        overflow-x: hidden; /* Prevent horizontal scrolling */
       }
-      h1, h2 {
+      h1,
+      h2 {
         text-align: center;
-        color: #333;
+        color: #fff;
       }
       .section {
         background-color: #000000;
@@ -29,9 +29,10 @@
         margin: 20px;
         width: 90%;
         max-width: 1200px;
+        text-align: center;
       }
       textarea {
-        width: calc(100% - 20px);
+        width: calc(100% - 40px);
         padding: 10px;
         font-size: 1rem;
         border: 1px solid #ccc;
@@ -47,7 +48,6 @@
         color: #fff;
         border-radius: 20px;
         cursor: pointer;
-        width: 100%;
         font-size: 1rem;
         font-weight: bold;
       }
@@ -60,7 +60,7 @@
         gap: 20px;
         justify-items: center;
         width: 100%;
-        max-width: 1200px; /* Prevent cards from stretching too wide */
+        max-width: 1200px;
         margin: 20px auto;
       }
       .flashcard {
@@ -70,12 +70,8 @@
         text-align: center;
         width: 100%;
         max-width: 300px;
+        background-color: inherit; /* Maintain same background */
       }
-
-      em {
-        color: #fff;
-      }
-
       .flashcard h3 {
         margin: 0 0 10px;
         font-size: 1.4em;
@@ -93,47 +89,62 @@
       }
       ul li {
         text-align: left;
-        color: #666;
+        color: #fff;
+      }
+      #word-list {
+        margin-top: 20px;
+        text-align: left;
+        color: #fff;
       }
     </style>
   </head>
   <body>
     <h1>Flashcards Generator</h1>
 
-    <!-- Section 1: Copyable JSON Framework -->
     <div class="section">
       <h2>JSON Framework</h2>
-      <textarea id="json-framework" readonly>{
+      <textarea id="json-framework" readonly>
         I am going to send a word list and you should fill this Words object with every word that I will send you. Please be careful with translation and try to do yoru best to translate it
-  "Words": {
-    "example": {
-      "transcription": "",
-      "definition": "",
-      "synonyms": [""],
-      "antonyms": [""],
-      "Examples": {
-        "Example1": "",
-        "Example2": "",
-        "Example3": ""
-      }
-    }
-  }
-}</textarea>
+{
+        "Words": {
+          "example": {
+            "transcription": "",
+            "definition": "",
+            "synonyms": [""],
+            "antonyms": [""],
+            "Examples": {
+              "Example1": "",
+              "Example2": "",
+              "Example3": ""
+            }
+          }
+        }
+      }</textarea
+      >
       <button onclick="copyJSON()">Copy JSON Framework</button>
     </div>
 
-    <!-- Section 2: JSON Input Field -->
     <div class="section">
       <h2>Enter JSON</h2>
-      <textarea id="json-input" placeholder="Paste your JSON structure here..."></textarea>
+      <textarea
+        id="json-input"
+        placeholder="Paste your JSON structure here..."
+      ></textarea>
       <button onclick="loadFlashcards()">Load Flashcards</button>
     </div>
 
-    <!-- Section 3: Flashcards Container -->
-    <h1 style="color: red;">Upload new words to <a href="https://www.notion.so/zohidjon/Typing-new-words-164a4ed67a4980c8adf0c06eb86ee81a">Typing new words</a></h1>
+    <h1 style="color: red">
+      Upload new words to
+      <a
+        href="https://www.notion.so/zohidjon/Typing-new-words-164a4ed67a4980c8adf0c06eb86ee81a"
+        >Typing new words</a
+      >
+    </h1>
+
     <div class="section">
       <h2>Flashcards</h2>
       <div class="flashcards-container" id="flashcards-container"></div>
+      <div id="word-list"></div>
     </div>
 
     <script>
@@ -160,30 +171,45 @@
 
       function createFlashcards(data) {
         const container = document.getElementById("flashcards-container");
+        const wordList = document.getElementById("word-list");
         container.innerHTML = ""; // Clear existing flashcards
+        wordList.innerHTML = "<h3>Word List:</h3><ul>"; // Reset word list
 
         const words = data.Words;
+        let index = 1;
 
         for (const [word, details] of Object.entries(words)) {
           const flashcard = document.createElement("div");
           flashcard.className = "flashcard";
 
-          const synonyms = details.synonyms ? details.synonyms.join(", ") : "None";
-          const antonyms = details.antonyms ? details.antonyms.join(", ") : "None";
+          const synonyms = details.synonyms
+            ? details.synonyms.join(", ")
+            : "None";
+          const antonyms = details.antonyms
+            ? details.antonyms.join(", ")
+            : "None";
           const examples = Object.values(details.Examples || {})
-            .map((example) => `<li><em>"${example}"</em></li>`)
+            .map((example) => `<li><em>\"${example}\"</em></li>`)
             .join("");
 
           flashcard.innerHTML = `
             <h3>${word}</h3>
-            <p><i>[${details.transcription || "N/A"}]</i> - ${details.definition}</p>
+            <p><i>[${details.transcription || "N/A"}]</i> - ${
+            details.definition
+          }</p>
             <p><b>Synonyms:</b> ${synonyms}</p>
             <p><b>Antonyms:</b> ${antonyms}</p>
             <p><b>Examples:</b><ul>${examples}</ul></p>
           `;
 
           container.appendChild(flashcard);
+
+          // Add word to the word list
+          wordList.innerHTML += `<li>${index}. ${word}</li>`;
+          index++;
         }
+
+        wordList.innerHTML += "</ul>";
       }
     </script>
   </body>
