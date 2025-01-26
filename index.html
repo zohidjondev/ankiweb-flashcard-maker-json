@@ -144,7 +144,9 @@
     <div class="section">
       <h2>Flashcards</h2>
       <div class="flashcards-container" id="flashcards-container"></div>
-      <div id="word-list"></div>
+      <h3 style="color: #fff;">Word List:</h3><ul>
+      <ol id="word-list">
+      </ol>
     </div>
 
     <script>
@@ -173,7 +175,6 @@
         const container = document.getElementById("flashcards-container");
         const wordList = document.getElementById("word-list");
         container.innerHTML = ""; // Clear existing flashcards
-        wordList.innerHTML = "<h3>Word List:</h3><ul>"; // Reset word list
 
         const words = data.Words;
         let index = 1;
@@ -205,11 +206,11 @@
           container.appendChild(flashcard);
 
           // Add word to the word list
+          unOrderedListItem = document.querySelector(".orderedList");
           wordList.innerHTML += `<li>${word}</li>`;
           index++;
         }
-
-        wordList.innerHTML += "</ul>";
+        wordList.innerHTML += "</ol>";
       }
     </script>
   </body>
